@@ -6,7 +6,7 @@ import utils.Log;
 import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.*;
-import static utils.PropertiesHelper.*;
+import static utils.helpers.LoginHelper.*;
 
 public class LoginPage {
 
