@@ -9,15 +9,20 @@ import static com.codeborne.selenide.Condition.*;
 import static orange_hrm.page_objects.AddCandidatePage.*;
 import static orange_hrm.page_objects.AddUserPage.*;
 import static orange_hrm.page_objects.AdminPage.*;
+import static orange_hrm.page_objects.AssignLeavePage.*;
 import static orange_hrm.page_objects.DashboardPage.*;
 import static orange_hrm.page_objects.JobTitlesPage.*;
+import static orange_hrm.page_objects.LeaveListPage.findAssignLeave;
 import static orange_hrm.page_objects.LoginPage.*;
+import static orange_hrm.page_objects.PIMPage.*;
+import static orange_hrm.page_objects.PersonalDetailsPage.*;
 import static orange_hrm.page_objects.RecruitmentPage.*;
 import static utils.Driver.getMaximizedWindow;
 import static utils.helpers.AddCandidateHelper.*;
-import static utils.helpers.AddCandidateHelper.getCandidateLastName;
 import static utils.helpers.AddUserHelper.*;
+import static utils.helpers.AssignLeaveHelper.*;
 import static utils.helpers.JobTitleHelper.*;
+import static utils.helpers.SalesEmployeeHelper.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class OrangeTests {
@@ -96,6 +101,41 @@ public class OrangeTests {
 
     }
 
+    @Test
+    public void assignLeave () throws IOException {
+
+        clickAssignLeaveLink();
+
+        getAssignLeaveEmployeeNameField().shouldBe(visible);
+        getAssignLeaveTypeField().shouldBe(visible);
+        getAssignLeaveFromDateField().shouldBe(visible);
+        getAssignLeaveToDateField().shouldBe(visible);
+
+        enterEmployeeName(getAssignLeaveEmployeeName());
+        selectLeaveType(getAssignLeaveType());
+        selectFromDate(getAssignLeaveFromDate());
+        selectToDate(getAssignLeaveToDate());
+
+        clickAssignButton();
+
+        findAssignLeave(getAssignLeaveFromDate() +
+                " to " + getAssignLeaveToDate()).shouldBe(visible);
+    }
+
+    @Test
+    public void checkSalesEmployee () throws IOException {
+
+        clickPIMPageLink();
+        findSalesEmployee(getSalesSubUnit());
+
+        getFirstNameField().shouldHave(exactValue(getSalesFirstName()));
+        getLastNameField().shouldHave(exactValue(getSalesLastName()));
+        getEmployeeIdField().shouldHave(exactValue(getSalesId()));
+        getMaleGenderRadiobutton().shouldBe(checked);
+        getMaritalStatusField().shouldHave(exactValue(getSalesMaritalStatus()));
+        getNationalityField().shouldHave(text(getSalesNationality()));
+        getDateOfBirthField().shouldHave(exactValue(getSalesDateOfBirth()));
+    }
 
 
 }
