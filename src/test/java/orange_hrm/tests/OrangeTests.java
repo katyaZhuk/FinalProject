@@ -6,12 +6,16 @@ import java.io.IOException;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
+import static orange_hrm.page_objects.AddCandidatePage.*;
 import static orange_hrm.page_objects.AddUserPage.*;
 import static orange_hrm.page_objects.AdminPage.*;
 import static orange_hrm.page_objects.DashboardPage.*;
 import static orange_hrm.page_objects.JobTitlesPage.*;
 import static orange_hrm.page_objects.LoginPage.*;
+import static orange_hrm.page_objects.RecruitmentPage.*;
 import static utils.Driver.getMaximizedWindow;
+import static utils.helpers.AddCandidateHelper.*;
+import static utils.helpers.AddCandidateHelper.getCandidateLastName;
 import static utils.helpers.AddUserHelper.*;
 import static utils.helpers.JobTitleHelper.*;
 
@@ -43,7 +47,7 @@ public class OrangeTests {
         getPasswordField().shouldBe(visible).sendKeys(getNewUserPassword());
         getConfirmPasswordField().shouldBe(visible).sendKeys(getNewUserConfirmPassword());
 
-        clickSaveButton();
+        clickSaveUserButton();
 
         findNewUser().shouldBe(exist);
 
@@ -71,6 +75,27 @@ public class OrangeTests {
                 }
         );
     }
+
+    @Test
+    public void addCandidate() throws IOException {
+
+        clickCandidatesLink();
+        clickAddCandidatesButton();
+
+        enterFullName(getCandidateFirstName(), getCandidateLastName());
+        enterEmail(getCandidateEmail());
+        enterContactNo(getCandidateContactNo());
+        selectJobVacancy(getCandidateJobVacancy());
+        addResume(getCandidateResume());
+        setApplicationDate(getCandidateApplicationDate());
+        selectCheckbox();
+
+        clickSaveCandidateButton();
+
+        getNewCandidate(getCandidateLastName()).shouldBe(exist);
+
+    }
+
 
 
 }

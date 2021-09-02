@@ -3,6 +3,7 @@ package orange_hrm.page_objects;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import utils.Log;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -18,29 +19,36 @@ public class JobTitlesPage {
 
     public static void clickAddJobTitleButton() {
         ADD_JOB_TITLE_BUTTON.click();
+        Log.info("Add job title button is clicked on");
     }
 
     public static void fillJobTitleField(String jobTitle) {
         JOB_TITLE_FIELD.sendKeys(jobTitle);
+        Log.info("Job title " + jobTitle + " is entered");
     }
 
     public static void clickSaveNewJobTitleButton() {
         SAVE_BUTTON.click();
+        Log.info("Save button is clicked on to create new job title");
     }
 
     public static SelenideElement getNewJobTitle(String jobTitle) {
+        Log.info("Job title " + jobTitle + " is found in job titles collection");
         return JOB_TITLES_COLLECTION.findBy(Condition.text(jobTitle));
     }
 
     public static void clickDeleteNewJobTitleButton() {
         DELETE_BUTTON.click();
+        Log.info("Delete button is clicked to delete created job title");
     }
 
     public static void clickDeleteConfirmationButton() {
         DELETE_CONFIRMATION_BUTTON.click();
+        Log.info("Delete confirmation button is clicked on");
     }
 
     public static String getJobTitleCheckbox() {
+        Log.info("New job title checkbox is selected");
         return JOB_TITLE_CHECKBOX;
     }
 
