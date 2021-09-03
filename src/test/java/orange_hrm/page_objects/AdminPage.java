@@ -17,6 +17,8 @@ public class AdminPage {
     private static final SelenideElement JOB_TAB = $("#menu_admin_Job");
     private static final SelenideElement JOB_TITLES_LINK = $("#menu_admin_viewJobTitleList");
     private static final ElementsCollection NEW_USERS_COLLECTION = $$("tbody tr");
+    private static final SelenideElement ORGANIZATION_TAB = $("#menu_admin_Organization");
+    private static final SelenideElement STRUCTURE_LINK = $("#menu_admin_viewCompanyStructure");
 
     public static void clickAdminTab() {
         ADMIN_TAB.click();
@@ -38,6 +40,13 @@ public class AdminPage {
         JOB_TAB.hover();
         JOB_TITLES_LINK.click();
         Log.info("Job titles link is clicked on");
+    }
+
+    public static void clickOrganizationStructureLink () {
+        ADMIN_TAB.hover();
+        ORGANIZATION_TAB.hover();
+        STRUCTURE_LINK.click();
+        Log.info("Organization structure link is clicked on");
     }
 
 }

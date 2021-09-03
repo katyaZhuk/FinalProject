@@ -12,8 +12,9 @@ import static orange_hrm.page_objects.AdminPage.*;
 import static orange_hrm.page_objects.AssignLeavePage.*;
 import static orange_hrm.page_objects.DashboardPage.*;
 import static orange_hrm.page_objects.JobTitlesPage.*;
-import static orange_hrm.page_objects.LeaveListPage.findAssignLeave;
+import static orange_hrm.page_objects.LeaveListPage.*;
 import static orange_hrm.page_objects.LoginPage.*;
+import static orange_hrm.page_objects.OrganizationStructurePage.*;
 import static orange_hrm.page_objects.PIMPage.*;
 import static orange_hrm.page_objects.PersonalDetailsPage.*;
 import static orange_hrm.page_objects.RecruitmentPage.*;
@@ -23,6 +24,7 @@ import static utils.helpers.AddUserHelper.*;
 import static utils.helpers.AssignLeaveHelper.*;
 import static utils.helpers.JobTitleHelper.*;
 import static utils.helpers.SalesEmployeeHelper.*;
+import static utils.helpers.StructureHelper.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -169,6 +171,35 @@ public class OrangeTests {
     }
 
     @Order(8)
+    @Test
+    public void editOrganizationStructure() throws IOException {
+
+        clickOrganizationStructureLink();
+
+        clickEditOrganizationStructureButton();
+        addNewDepartment();
+        enterDepartmentName(getNewDepartment());
+        clickSaveDepartmentButton();
+        clickDoneButton();
+
+        int collectionSizeBeforeDeleting = getSalesAndMarketingCollection().size();
+
+        clickEditOrganizationStructureButton();
+        deleteNewDepartment();
+        confirmDeleteNewDepartment();
+        clickDoneButton();
+
+        getSalesAndMarketingCollection().shouldHave(size(collectionSizeBeforeDeleting - 1));
+
+    }
+
+    @Order(9)
+    @Test
+    public void ninthTest() {
+
+    }
+
+    @Order(10)
     @Test
     public void logout() {
 
