@@ -16,38 +16,68 @@ public class AddUserPage {
     private static final SelenideElement SAVE_BUTTON = $("#btnSave");
 
     public static SelenideElement getUserRoleField() {
-        Log.info("User role is selected");
+        Log.info("User role field is visible");
         return USER_ROLE_FIELD;
     }
 
     public static SelenideElement getEmployeeNameField() {
-        Log.info("Employee name is entered");
+        Log.info("Employee name field is visible");
         return EMPLOYEE_NAME_FIELD;
     }
 
     public static SelenideElement getUsernameField() {
-        Log.info("Username is entered");
+        Log.info("Username field is visible");
         return USERNAME_FIELD;
     }
 
     public static SelenideElement getStatusField() {
-        Log.info("Status is selected");
+        Log.info("Status field is visible");
         return STATUS_FIELD;
     }
 
     public static SelenideElement getPasswordField() {
-        Log.info("Password is entered");
+        Log.info("Password field is visible");
         return PASSWORD_FIELD;
     }
 
     public static SelenideElement getConfirmPasswordField() {
-        Log.info("Confirm password is entered");
+        Log.info("Confirm password field is visible");
         return CONFIRM_PASSWORD_FIELD;
     }
 
     public static void clickSaveUserButton() {
         Log.info("Save button is clicked on");
         SAVE_BUTTON.click();
+    }
+
+    public static void selectUserRole (String userRole) {
+        USER_ROLE_FIELD.selectOption(userRole);
+        Log.info("User role " + userRole + " is selected");
+    }
+
+    public static void enterEmployeeNameForAddUser (String name) {
+        EMPLOYEE_NAME_FIELD.sendKeys(name);
+        Log.info("Employee name " + name + " is entered");
+    }
+
+    public static void enterUsername (String username) {
+        USERNAME_FIELD.sendKeys(username);
+        Log.info("Username " + username + " is entered");
+    }
+
+    public static void selectStatus (String status) {
+        STATUS_FIELD.selectOption(status);
+        Log.info("Status " + status + " is selected");
+    }
+
+    public static void enterPassword (String password) {
+        PASSWORD_FIELD.sendKeys(password);
+        Log.info("Password " + password + " is entered");
+    }
+
+    public static void enterConfirmPassword (String confirmPassword) {
+        CONFIRM_PASSWORD_FIELD.sendKeys(confirmPassword);
+        Log.info("Confirm password " + confirmPassword + " is entered");
     }
 
 }

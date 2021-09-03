@@ -13,6 +13,7 @@ public class LoginPage {
     private static final SelenideElement USERNAME_FIELD = $("#txtUsername");
     private static final SelenideElement PASSWORD_FIELD = $("#txtPassword");
     private static final SelenideElement LOGIN_BUTTON = $("#btnLogin");
+    private static final SelenideElement LOGIN_PANEL = $("#logInPanelHeading");
 
     public static void openLoginPage () throws IOException {
         open(getURL());
@@ -28,6 +29,11 @@ public class LoginPage {
 
         LOGIN_BUTTON.click();
         Log.info("Login button is clicked on");
+    }
+
+    public static SelenideElement getLoginPanel () {
+        Log.info("Login panel is visible");
+        return LOGIN_PANEL;
     }
 
 }

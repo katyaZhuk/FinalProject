@@ -17,18 +17,22 @@ public class AssignLeavePage {
     private static final SelenideElement ASSIGN_BUTTON = $("#assignBtn");
 
     public static SelenideElement getAssignLeaveEmployeeNameField() {
+        Log.info("Employee name field is visible");
         return EMPLOYEE_NAME_FIELD;
     }
 
     public static SelenideElement getAssignLeaveTypeField() {
+        Log.info("Type field is visible");
         return LEAVE_TYPE_FIELD;
     }
 
     public static SelenideElement getAssignLeaveFromDateField() {
+        Log.info("From date field is visible");
         return FROM_DATE_FIELD;
     }
 
     public static SelenideElement getAssignLeaveToDateField() {
+        Log.info("To date field is visible");
         return TO_DATE_FIELD;
     }
 
@@ -38,7 +42,7 @@ public class AssignLeavePage {
         Log.info("Assign leave page is opened");
     }
 
-    public static void enterEmployeeName (String name) {
+    public static void enterEmployeeNameForAssignLeave(String name) {
         EMPLOYEE_NAME_FIELD.sendKeys(name);
         Log.info("Employee name " + name + " is entered");
     }

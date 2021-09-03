@@ -25,6 +25,7 @@ import static utils.helpers.JobTitleHelper.*;
 import static utils.helpers.SalesEmployeeHelper.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class OrangeTests {
 
     @BeforeAll
@@ -33,24 +34,35 @@ public class OrangeTests {
     }
 
     @BeforeEach
+    @Order(1)
     @Test
     public void loginTest() throws IOException {
+
         openLoginPage();
         login();
         getDashboardPageTitle().shouldBe(visible);
     }
 
+    @Order(2)
     @Test
     public void addUserTest() throws IOException {
+
         clickAdminTab();
         clickAddUserButton();
 
-        getUserRoleField().shouldBe(visible).selectOption(getESSUserRole());
-        getEmployeeNameField().shouldBe(visible).sendKeys(getEmployeeName());
-        getUsernameField().shouldBe(visible).sendKeys(getNewUsername());
-        getStatusField().shouldBe(visible).selectOption(getEnabledStatus());
-        getPasswordField().shouldBe(visible).sendKeys(getNewUserPassword());
-        getConfirmPasswordField().shouldBe(visible).sendKeys(getNewUserConfirmPassword());
+        getUserRoleField().shouldBe(visible);
+        getEmployeeNameField().shouldBe(visible);
+        getUsernameField().shouldBe(visible);
+        getStatusField().shouldBe(visible);
+        getPasswordField().shouldBe(visible);
+        getConfirmPasswordField().shouldBe(visible);
+
+        selectUserRole(getESSUserRole());
+        enterEmployeeNameForAddUser(getEmployeeName());
+        enterUsername(getNewUsername());
+        selectStatus(getEnabledStatus());
+        enterPassword(getNewUserPassword());
+        enterConfirmPassword(getNewUserConfirmPassword());
 
         clickSaveUserButton();
 
@@ -58,6 +70,7 @@ public class OrangeTests {
 
     }
 
+    @Order(3)
     @Test
     public void addAndDeleteThreeJobTitlesTest() throws IOException {
 
@@ -81,6 +94,7 @@ public class OrangeTests {
         );
     }
 
+    @Order(4)
     @Test
     public void addCandidate() throws IOException {
 
@@ -101,8 +115,9 @@ public class OrangeTests {
 
     }
 
+    @Order(5)
     @Test
-    public void assignLeave () throws IOException {
+    public void assignLeave() throws IOException {
 
         clickAssignLeaveLink();
 
@@ -111,7 +126,7 @@ public class OrangeTests {
         getAssignLeaveFromDateField().shouldBe(visible);
         getAssignLeaveToDateField().shouldBe(visible);
 
-        enterEmployeeName(getAssignLeaveEmployeeName());
+        enterEmployeeNameForAssignLeave(getAssignLeaveEmployeeName());
         selectLeaveType(getAssignLeaveType());
         selectFromDate(getAssignLeaveFromDate());
         selectToDate(getAssignLeaveToDate());
@@ -122,8 +137,24 @@ public class OrangeTests {
                 " to " + getAssignLeaveToDate()).shouldBe(visible);
     }
 
+    @Order(6)
     @Test
-    public void checkSalesEmployee () throws IOException {
+    public void checkDashboard() {
+
+        getAssignLeaveButton().shouldBe(visible);
+        getLeaveListButton().shouldBe(visible);
+        getTimesheetsButton().shouldBe(visible);
+        getApplyLeaveButton().shouldBe(visible);
+        getMyLeaveButton().shouldBe(visible);
+        getMyTimesheetButton().shouldBe(visible);
+        getEmployeeDistributionBySubunitDiagram().shouldBe(visible);
+        getLegendComponent().shouldBe(visible);
+        getPendingLeaveRequestsComponent().shouldBe(visible);
+    }
+
+    @Order(7)
+    @Test
+    public void checkSalesEmployee() throws IOException {
 
         clickPIMPageLink();
         findSalesEmployee(getSalesSubUnit());
@@ -137,5 +168,14 @@ public class OrangeTests {
         getDateOfBirthField().shouldHave(exactValue(getSalesDateOfBirth()));
     }
 
+    @Order(8)
+    @Test
+    public void logout() {
+
+        clickWelcomeDropList();
+        clickLogout();
+
+        getLoginPanel().shouldBe(visible);
+    }
 
 }
