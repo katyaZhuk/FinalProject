@@ -17,7 +17,7 @@ public class LeaveListPage {
     private static final SelenideElement SEARCH_BUTTON = $("#btnSearch");
     private static final ElementsCollection LEAVE_LIST_COLLECTION = $$("tbody tr");
 
-    public static SelenideElement findAssignLeave (String dates) throws IOException {
+    public static SelenideElement findAssignLeave(String dates) throws IOException {
         LEAVE_LIST_PAGE.click();
         ALL_LEAVE_STATUSES_CHECKBOX.setSelected(true);
         EMPLOYEE_FIELD.sendKeys(getAssignLeaveEmployeeName());

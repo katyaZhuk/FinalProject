@@ -28,4 +28,9 @@ public class AssignLeaveHelper {
         return props.getProperty("assign.to_date");
     }
 
+    public static String getAssignLeaveDates() throws IOException {
+        props.load(new FileInputStream("src/main/resources/assign_leave.properties"));
+        return props.getProperty("assign.from_date") + " to " + props.getProperty("assign.to_date");
+    }
+
 }

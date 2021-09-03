@@ -19,7 +19,7 @@ public class LoginHelper {
         return props.getProperty("login.password");
     }
 
-    public static String getURL () throws IOException {
+    public static String getURL() throws IOException {
         props.load(new FileReader("src/main/resources/login_user.properties"));
         return props.getProperty("URL");
     }

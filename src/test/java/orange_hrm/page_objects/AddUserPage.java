@@ -50,32 +50,32 @@ public class AddUserPage {
         SAVE_BUTTON.click();
     }
 
-    public static void selectUserRole (String userRole) {
+    public static void selectUserRole(String userRole) {
         USER_ROLE_FIELD.selectOption(userRole);
         Log.info("User role " + userRole + " is selected");
     }
 
-    public static void enterEmployeeNameForAddUser (String name) {
+    public static void enterEmployeeNameForAddUser(String name) {
         EMPLOYEE_NAME_FIELD.sendKeys(name);
         Log.info("Employee name " + name + " is entered");
     }
 
-    public static void enterUsername (String username) {
+    public static void enterUsername(String username) {
         USERNAME_FIELD.sendKeys(username);
         Log.info("Username " + username + " is entered");
     }
 
-    public static void selectStatus (String status) {
+    public static void selectStatus(String status) {
         STATUS_FIELD.selectOption(status);
         Log.info("Status " + status + " is selected");
     }
 
-    public static void enterPassword (String password) {
+    public static void enterPassword(String password) {
         PASSWORD_FIELD.sendKeys(password);
         Log.info("Password " + password + " is entered");
     }
 
-    public static void enterConfirmPassword (String confirmPassword) {
+    public static void enterConfirmPassword(String confirmPassword) {
         CONFIRM_PASSWORD_FIELD.sendKeys(confirmPassword);
         Log.info("Confirm password " + confirmPassword + " is entered");
     }

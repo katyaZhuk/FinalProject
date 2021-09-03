@@ -64,7 +64,7 @@ public class AddCandidatePage {
         Log.info("Save button is clicked on");
     }
 
-    public static SelenideElement getNewCandidate (String lastName) {
+    public static SelenideElement getNewCandidate(String lastName) {
         Log.info("Candidate with last name " + lastName + " is found");
         return CANDIDATES_COLLECTION.findBy(Condition.text(lastName));
     }

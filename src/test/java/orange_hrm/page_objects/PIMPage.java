@@ -1,9 +1,7 @@
 package orange_hrm.page_objects;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 import utils.Log;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -16,12 +14,12 @@ public class PIMPage {
     private static final ElementsCollection SALES_COLLECTION = $$("tbody tr");
     private static final String SALES_LINK = "td:nth-of-type(2)";
 
-    public static void clickPIMPageLink () {
+    public static void clickPIMPageLink() {
         PIM_PAGE_LINK.click();
         Log.info("PIM page is opened");
     }
 
-    public static void findSalesEmployee (String subUnit) {
+    public static void findSalesEmployee(String subUnit) {
         SUB_UNIT_FIELD.selectOption(subUnit);
         Log.info("Sub unit " + subUnit + " is selected");
 

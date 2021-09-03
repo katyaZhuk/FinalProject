@@ -15,12 +15,12 @@ public class LoginPage {
     private static final SelenideElement LOGIN_BUTTON = $("#btnLogin");
     private static final SelenideElement LOGIN_PANEL = $("#logInPanelHeading");
 
-    public static void openLoginPage () throws IOException {
+    public static void openLoginPage() throws IOException {
         open(getURL());
         Log.info("Login page is opened");
     }
 
-    public static void login () throws IOException {
+    public static void login() throws IOException {
         USERNAME_FIELD.sendKeys(getUsername());
         Log.info("Username is entered to the username field");
 
@@ -31,7 +31,7 @@ public class LoginPage {
         Log.info("Login button is clicked on");
     }
 
-    public static SelenideElement getLoginPanel () {
+    public static SelenideElement getLoginPanel() {
         Log.info("Login panel is visible");
         return LOGIN_PANEL;
     }

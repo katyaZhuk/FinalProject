@@ -1,7 +1,6 @@
 package orange_hrm.page_objects;
 
 import com.codeborne.selenide.SelenideElement;
-import io.qameta.allure.Link;
 import utils.Log;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -36,7 +35,7 @@ public class AssignLeavePage {
         return TO_DATE_FIELD;
     }
 
-    public static void clickAssignLeaveLink () {
+    public static void clickAssignLeaveLink() {
         LEAVE_TAB.hover();
         ASSIGN_LEAVE_LINK.click();
         Log.info("Assign leave page is opened");
@@ -47,24 +46,24 @@ public class AssignLeavePage {
         Log.info("Employee name " + name + " is entered");
     }
 
-    public static void selectLeaveType (String leaveType) {
+    public static void selectLeaveType(String leaveType) {
         LEAVE_TYPE_FIELD.selectOption(leaveType);
         Log.info("Leave type " + leaveType + " is selected");
     }
 
-    public static void selectFromDate (String from) {
+    public static void selectFromDate(String from) {
         FROM_DATE_FIELD.clear();
         FROM_DATE_FIELD.sendKeys(from);
         Log.info("Assign leave date from " + from + " is entered");
     }
 
-    public static void selectToDate (String to) {
+    public static void selectToDate(String to) {
         TO_DATE_FIELD.clear();
         TO_DATE_FIELD.sendKeys(to);
         Log.info("Assign leave date to " + to + " is entered");
     }
 
-    public static void clickAssignButton () {
+    public static void clickAssignButton() {
         ASSIGN_BUTTON.pressEnter();
         Log.info("Assign button is clicked on to assign leave");
     }

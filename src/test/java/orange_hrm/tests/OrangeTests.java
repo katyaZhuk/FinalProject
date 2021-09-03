@@ -14,6 +14,7 @@ import static orange_hrm.page_objects.DashboardPage.*;
 import static orange_hrm.page_objects.JobTitlesPage.*;
 import static orange_hrm.page_objects.LeaveListPage.*;
 import static orange_hrm.page_objects.LoginPage.*;
+import static orange_hrm.page_objects.MyInfoPage.*;
 import static orange_hrm.page_objects.OrganizationStructurePage.*;
 import static orange_hrm.page_objects.PIMPage.*;
 import static orange_hrm.page_objects.PersonalDetailsPage.*;
@@ -23,6 +24,7 @@ import static utils.helpers.AddCandidateHelper.*;
 import static utils.helpers.AddUserHelper.*;
 import static utils.helpers.AssignLeaveHelper.*;
 import static utils.helpers.JobTitleHelper.*;
+import static utils.helpers.PhotoHelper.*;
 import static utils.helpers.SalesEmployeeHelper.*;
 import static utils.helpers.StructureHelper.*;
 
@@ -37,7 +39,6 @@ public class OrangeTests {
 
     @BeforeEach
     @Order(1)
-    @Test
     public void loginTest() throws IOException {
 
         openLoginPage();
@@ -98,7 +99,7 @@ public class OrangeTests {
 
     @Order(4)
     @Test
-    public void addCandidate() throws IOException {
+    public void addCandidateTest() throws IOException {
 
         clickCandidatesLink();
         clickAddCandidatesButton();
@@ -119,7 +120,7 @@ public class OrangeTests {
 
     @Order(5)
     @Test
-    public void assignLeave() throws IOException {
+    public void assignLeaveTest() throws IOException {
 
         clickAssignLeaveLink();
 
@@ -135,13 +136,12 @@ public class OrangeTests {
 
         clickAssignButton();
 
-        findAssignLeave(getAssignLeaveFromDate() +
-                " to " + getAssignLeaveToDate()).shouldBe(visible);
+        findAssignLeave(getAssignLeaveDates()).shouldBe(visible);
     }
 
     @Order(6)
     @Test
-    public void checkDashboard() {
+    public void checkDashboardTest() {
 
         getAssignLeaveButton().shouldBe(visible);
         getLeaveListButton().shouldBe(visible);
@@ -156,7 +156,7 @@ public class OrangeTests {
 
     @Order(7)
     @Test
-    public void checkSalesEmployee() throws IOException {
+    public void checkSalesEmployeeTest() throws IOException {
 
         clickPIMPageLink();
         findSalesEmployee(getSalesSubUnit());
@@ -172,7 +172,7 @@ public class OrangeTests {
 
     @Order(8)
     @Test
-    public void editOrganizationStructure() throws IOException {
+    public void editOrganizationStructureTest() throws IOException {
 
         clickOrganizationStructureLink();
 
@@ -195,13 +195,21 @@ public class OrangeTests {
 
     @Order(9)
     @Test
-    public void ninthTest() {
+    public void changeEmployeePhotoTest() throws IOException {
+
+        clickMyInfoTab();
+
+        clickEmployeePhotoLink();
+        selectPhotoFile(getEmployeePhotoPath());
+        clickUploadButton();
+
+        getSuccessMessage().shouldBe(visible);
 
     }
 
     @Order(10)
     @Test
-    public void logout() {
+    public void logoutTest() {
 
         clickWelcomeDropList();
         clickLogout();

@@ -29,6 +29,7 @@ public class DashboardPage {
     private static final SelenideElement WELCOME_DROPLIST = $("#welcome");
     private static final SelenideElement LOGOUT_BUTTON =
             $(By.xpath("//a[contains(text(), 'Logout')]"));
+    private static final SelenideElement MY_INFO_TAB = $("#menu_pim_viewMyDetails");
 
     public static SelenideElement getDashboardPageTitle() {
         Log.info("Dashboard page is opened");
@@ -88,5 +89,10 @@ public class DashboardPage {
     public static void clickLogout () {
         LOGOUT_BUTTON.click();
         Log.info("Logout button is clicked on");
+    }
+
+    public static void clickMyInfoTab () {
+        MY_INFO_TAB.click();
+        Log.info("My info tab is clicked on to open my info page");
     }
 }
