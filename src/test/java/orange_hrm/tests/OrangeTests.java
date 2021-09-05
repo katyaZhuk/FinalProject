@@ -1,5 +1,7 @@
 package orange_hrm.tests;
 
+import io.qameta.allure.Description;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;
@@ -38,6 +40,7 @@ public class OrangeTests {
     }
 
     @BeforeEach
+    @Description("Test for login to https://opensource-demo.orangehrmlive.com/")
     @Order(1)
     public void loginTest() throws IOException {
 
@@ -46,8 +49,9 @@ public class OrangeTests {
         getDashboardPageTitle().shouldBe(visible);
     }
 
+    @Description("Test for adding new user")
+    @Ignore
     @Order(2)
-    @Test
     public void addUserTest() throws IOException {
 
         clickAdminTab();
@@ -73,6 +77,7 @@ public class OrangeTests {
 
     }
 
+    @Description("Test for adding and deleting three job titles")
     @Order(3)
     @Test
     public void addAndDeleteThreeJobTitlesTest() throws IOException {
@@ -97,6 +102,7 @@ public class OrangeTests {
         );
     }
 
+    @Description("Test for adding new candidate")
     @Order(4)
     @Test
     public void addCandidateTest() throws IOException {
@@ -118,6 +124,7 @@ public class OrangeTests {
 
     }
 
+    @Description("Test for assigning leave by employee")
     @Order(5)
     @Test
     public void assignLeaveTest() throws IOException {
@@ -139,6 +146,7 @@ public class OrangeTests {
         findAssignLeave(getAssignLeaveDates()).shouldBe(visible);
     }
 
+    @Description("Test for checking dashboard to watch all elements")
     @Order(6)
     @Test
     public void checkDashboardTest() {
@@ -154,6 +162,7 @@ public class OrangeTests {
         getPendingLeaveRequestsComponent().shouldBe(visible);
     }
 
+    @Description("Test for checking any employee from sales subunit")
     @Order(7)
     @Test
     public void checkSalesEmployeeTest() throws IOException {
@@ -170,6 +179,7 @@ public class OrangeTests {
         getDateOfBirthField().shouldHave(exactValue(getSalesDateOfBirth()));
     }
 
+    @Description("Test for editing organisation structure by adding and deleting new department")
     @Order(8)
     @Test
     public void editOrganizationStructureTest() throws IOException {
@@ -193,6 +203,7 @@ public class OrangeTests {
 
     }
 
+    @Description("Test for changing employee photo by uploading new one")
     @Order(9)
     @Test
     public void changeEmployeePhotoTest() throws IOException {
@@ -207,6 +218,7 @@ public class OrangeTests {
 
     }
 
+    @Description("Test for logout from system")
     @Order(10)
     @Test
     public void logoutTest() {
