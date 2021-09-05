@@ -1,12 +1,11 @@
 package orange_hrm.tests;
 
 import io.qameta.allure.Description;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 
-import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 import static orange_hrm.page_objects.AddCandidatePage.*;
 import static orange_hrm.page_objects.AddUserPage.*;
@@ -14,21 +13,23 @@ import static orange_hrm.page_objects.AdminPage.*;
 import static orange_hrm.page_objects.AssignLeavePage.*;
 import static orange_hrm.page_objects.DashboardPage.*;
 import static orange_hrm.page_objects.JobTitlesPage.*;
-import static orange_hrm.page_objects.LeaveListPage.*;
+import static orange_hrm.page_objects.LeaveListPage.findAssignLeave;
 import static orange_hrm.page_objects.LoginPage.*;
 import static orange_hrm.page_objects.MyInfoPage.*;
 import static orange_hrm.page_objects.OrganizationStructurePage.*;
-import static orange_hrm.page_objects.PIMPage.*;
+import static orange_hrm.page_objects.PIMPage.clickPIMPageLink;
+import static orange_hrm.page_objects.PIMPage.findSalesEmployee;
 import static orange_hrm.page_objects.PersonalDetailsPage.*;
-import static orange_hrm.page_objects.RecruitmentPage.*;
+import static orange_hrm.page_objects.RecruitmentPage.clickAddCandidatesButton;
+import static orange_hrm.page_objects.RecruitmentPage.clickCandidatesLink;
 import static utils.Driver.getMaximizedWindow;
 import static utils.helpers.AddCandidateHelper.*;
 import static utils.helpers.AddUserHelper.*;
 import static utils.helpers.AssignLeaveHelper.*;
-import static utils.helpers.JobTitleHelper.*;
-import static utils.helpers.PhotoHelper.*;
+import static utils.helpers.JobTitleHelper.getJobTitlesList;
+import static utils.helpers.PhotoHelper.getEmployeePhotoPath;
 import static utils.helpers.SalesEmployeeHelper.*;
-import static utils.helpers.StructureHelper.*;
+import static utils.helpers.StructureHelper.getNewDepartment;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -50,7 +51,7 @@ public class OrangeTests {
         getDashboardPageTitle().shouldBe(visible);
     }
 
-    @Ignore
+    @Disabled
     @Test
     @Description("Test for adding new user")
     @Order(2)
