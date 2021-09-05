@@ -39,6 +39,7 @@ public class OrangeTests {
         getMaximizedWindow();
     }
 
+    @Test
     @BeforeEach
     @Description("Test for login to https://opensource-demo.orangehrmlive.com/")
     @Order(1)
@@ -49,8 +50,9 @@ public class OrangeTests {
         getDashboardPageTitle().shouldBe(visible);
     }
 
-    @Description("Test for adding new user")
     @Ignore
+    @Test
+    @Description("Test for adding new user")
     @Order(2)
     public void addUserTest() throws IOException {
 
@@ -77,9 +79,9 @@ public class OrangeTests {
 
     }
 
+    @Test
     @Description("Test for adding and deleting three job titles")
     @Order(3)
-    @Test
     public void addAndDeleteThreeJobTitlesTest() throws IOException {
 
         clickJobTitlesLink();
@@ -102,9 +104,9 @@ public class OrangeTests {
         );
     }
 
+    @Test
     @Description("Test for adding new candidate")
     @Order(4)
-    @Test
     public void addCandidateTest() throws IOException {
 
         clickCandidatesLink();
@@ -124,9 +126,9 @@ public class OrangeTests {
 
     }
 
+    @Test
     @Description("Test for assigning leave by employee")
     @Order(5)
-    @Test
     public void assignLeaveTest() throws IOException {
 
         clickAssignLeaveLink();
@@ -146,9 +148,9 @@ public class OrangeTests {
         findAssignLeave(getAssignLeaveDates()).shouldBe(visible);
     }
 
+    @Test
     @Description("Test for checking dashboard to watch all elements")
     @Order(6)
-    @Test
     public void checkDashboardTest() {
 
         getAssignLeaveButton().shouldBe(visible);
@@ -162,9 +164,9 @@ public class OrangeTests {
         getPendingLeaveRequestsComponent().shouldBe(visible);
     }
 
+    @Test
     @Description("Test for checking any employee from sales subunit")
     @Order(7)
-    @Test
     public void checkSalesEmployeeTest() throws IOException {
 
         clickPIMPageLink();
@@ -179,9 +181,9 @@ public class OrangeTests {
         getDateOfBirthField().shouldHave(exactValue(getSalesDateOfBirth()));
     }
 
+    @Test
     @Description("Test for editing organisation structure by adding and deleting new department")
     @Order(8)
-    @Test
     public void editOrganizationStructureTest() throws IOException {
 
         clickOrganizationStructureLink();
@@ -203,9 +205,9 @@ public class OrangeTests {
 
     }
 
+    @Test
     @Description("Test for changing employee photo by uploading new one")
     @Order(9)
-    @Test
     public void changeEmployeePhotoTest() throws IOException {
 
         clickMyInfoTab();
@@ -218,9 +220,9 @@ public class OrangeTests {
 
     }
 
+    @Test
     @Description("Test for logout from system")
     @Order(10)
-    @Test
     public void logoutTest() {
 
         clickWelcomeDropList();
