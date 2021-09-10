@@ -1,4 +1,4 @@
-package orange_hrm.page_objects;
+package utils.page_objects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import utils.Log;
 
 import java.io.File;
+import java.util.Optional;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -65,7 +66,10 @@ public class AddCandidatePage {
     }
 
     public static SelenideElement getNewCandidate(String lastName) {
-        Log.info("Candidate with last name " + lastName + " is found");
+        Optional.of(CANDIDATES_COLLECTION.findBy(Condition.text(lastName)))
+                .ifPresent(
+                        x -> Log.info("Candidate with last name " + lastName + " is found")
+                );
         return CANDIDATES_COLLECTION.findBy(Condition.text(lastName));
     }
 }

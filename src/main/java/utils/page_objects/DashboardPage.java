@@ -1,8 +1,10 @@
-package orange_hrm.page_objects;
+package utils.page_objects;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import utils.Log;
+
+import java.util.Optional;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -32,52 +34,72 @@ public class DashboardPage {
     private static final SelenideElement MY_INFO_TAB = $("#menu_pim_viewMyDetails");
 
     public static SelenideElement getDashboardPageTitle() {
-        Log.info("Dashboard page is opened");
+        Optional.of(DASHBOARD_PAGE_TITLE).ifPresent(
+                x -> Log.info("Dashboard page is opened")
+        );
         return DASHBOARD_PAGE_TITLE;
     }
 
     public static SelenideElement getAssignLeaveButton() {
-        Log.info("Assign leave button is visible");
+        Optional.of(ASSIGN_LEAVE_BUTTON).ifPresent(
+                x -> Log.info("Assign leave button is visible")
+        );
         return ASSIGN_LEAVE_BUTTON;
     }
 
     public static SelenideElement getLeaveListButton() {
-        Log.info("Leave list button is visible");
+        Optional.of(LEAVE_LIST_BUTTON).ifPresent(
+                x -> Log.info("Leave list button is visible")
+        );
         return LEAVE_LIST_BUTTON;
     }
 
     public static SelenideElement getTimesheetsButton() {
-        Log.info("Timesheets button is visible");
+        Optional.of(TIMESHEETS_BUTTON).ifPresent(
+                x -> Log.info("Timesheets button is visible")
+        );
         return TIMESHEETS_BUTTON;
     }
 
     public static SelenideElement getApplyLeaveButton() {
-        Log.info("Apply leave button is visible");
+        Optional.of(APPLY_LEAVE_BUTTON).ifPresent(
+                x -> Log.info("Apply leave button is visible")
+        );
         return APPLY_LEAVE_BUTTON;
     }
 
     public static SelenideElement getMyLeaveButton() {
-        Log.info("My leave button is visible");
+        Optional.of(MY_LEAVE_BUTTON).ifPresent(
+                x -> Log.info("My leave button is visible")
+        );
         return MY_LEAVE_BUTTON;
     }
 
     public static SelenideElement getMyTimesheetButton() {
-        Log.info("My timesheet button is visible");
+        Optional.of(MY_TIMESHEET_BUTTON).ifPresent(
+                x -> Log.info("My timesheet button is visible")
+        );
         return MY_TIMESHEET_BUTTON;
     }
 
     public static SelenideElement getEmployeeDistributionBySubunitDiagram() {
-        Log.info("Employee Distribution by subunit diagram is visible");
+        Optional.of(EMPLOYEE_DISTRIBUTION_BY_SUBUNIT_DIAGRAM).ifPresent(
+                x -> Log.info("Employee Distribution by subunit diagram is visible")
+        );
         return EMPLOYEE_DISTRIBUTION_BY_SUBUNIT_DIAGRAM;
     }
 
     public static SelenideElement getLegendComponent() {
-        Log.info("Legend component is visible");
+        Optional.of(LEGEND_COMPONENT).ifPresent(
+                x -> Log.info("Legend component is visible")
+        );
         return LEGEND_COMPONENT;
     }
 
     public static SelenideElement getPendingLeaveRequestsComponent() {
-        Log.info("Pending leave request component is visible");
+        Optional.of(PENDING_LEAVE_REQUESTS_COMPONENT).ifPresent(
+                x -> Log.info("Pending leave request component is visible")
+        );
         return PENDING_LEAVE_REQUESTS_COMPONENT;
     }
 

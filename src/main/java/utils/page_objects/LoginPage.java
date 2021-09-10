@@ -1,9 +1,10 @@
-package orange_hrm.page_objects;
+package utils.page_objects;
 
 import com.codeborne.selenide.SelenideElement;
 import utils.Log;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.codeborne.selenide.Selenide.*;
 import static utils.helpers.LoginHelper.*;
@@ -32,7 +33,9 @@ public class LoginPage {
     }
 
     public static SelenideElement getLoginPanel() {
-        Log.info("Login panel is visible");
+        Optional.of(LOGIN_PANEL).ifPresent(
+                x -> Log.info("Login panel is visible")
+        );
         return LOGIN_PANEL;
     }
 

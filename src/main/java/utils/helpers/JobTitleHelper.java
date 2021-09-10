@@ -13,7 +13,7 @@ public class JobTitleHelper {
     public static List<String> getJobTitlesList() throws IOException {
         List<String> jobTitlesList = new ArrayList<>();
 
-        props.load(new FileInputStream("src/main/resources/job_titles.properties"));
+        props.load(new FileInputStream("src/main/resources/clientData/job_titles.properties"));
         jobTitlesList.add(props.getProperty("job_title1"));
         jobTitlesList.add(props.getProperty("job_title2"));
         jobTitlesList.add(props.getProperty("job_title3"));

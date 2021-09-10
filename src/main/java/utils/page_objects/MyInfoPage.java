@@ -1,9 +1,10 @@
-package orange_hrm.page_objects;
+package utils.page_objects;
 
 import com.codeborne.selenide.SelenideElement;
 import utils.Log;
 
 import java.io.File;
+import java.util.Optional;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -30,6 +31,9 @@ public class MyInfoPage {
     }
 
     public static SelenideElement getSuccessMessage() {
+        Optional.of(SUCCESS_MESSAGE).ifPresent(
+                x -> Log.info("Photo is uploaded successfully")
+        );
         return SUCCESS_MESSAGE;
     }
 }

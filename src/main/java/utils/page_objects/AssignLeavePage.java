@@ -1,7 +1,9 @@
-package orange_hrm.page_objects;
+package utils.page_objects;
 
 import com.codeborne.selenide.SelenideElement;
 import utils.Log;
+
+import java.util.Optional;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -16,22 +18,30 @@ public class AssignLeavePage {
     private static final SelenideElement ASSIGN_BUTTON = $("#assignBtn");
 
     public static SelenideElement getAssignLeaveEmployeeNameField() {
-        Log.info("Employee name field is visible");
+        Optional.of(EMPLOYEE_NAME_FIELD).ifPresent(
+                x -> Log.info("Employee name field is visible")
+        );
         return EMPLOYEE_NAME_FIELD;
     }
 
     public static SelenideElement getAssignLeaveTypeField() {
-        Log.info("Type field is visible");
+        Optional.of(LEAVE_TYPE_FIELD).ifPresent(
+                x -> Log.info("Type field is visible")
+        );
         return LEAVE_TYPE_FIELD;
     }
 
     public static SelenideElement getAssignLeaveFromDateField() {
-        Log.info("From date field is visible");
+        Optional.of(FROM_DATE_FIELD).ifPresent(
+                x -> Log.info("From date field is visible")
+        );
         return FROM_DATE_FIELD;
     }
 
     public static SelenideElement getAssignLeaveToDateField() {
-        Log.info("To date field is visible");
+        Optional.of(TO_DATE_FIELD).ifPresent(
+                x -> Log.info("To date field is visible")
+        );
         return TO_DATE_FIELD;
     }
 

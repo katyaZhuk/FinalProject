@@ -8,28 +8,32 @@ public class AssignLeaveHelper {
 
     static Properties props = new Properties();
 
+    private static void loadFile() throws IOException {
+        props.load(new FileInputStream("src/main/resources/clientData/assign_leave.properties"));
+    }
+
     public static String getAssignLeaveEmployeeName() throws IOException {
-        props.load(new FileInputStream("src/main/resources/assign_leave.properties"));
+        loadFile();
         return props.getProperty("assign.employee_name");
     }
 
     public static String getAssignLeaveType() throws IOException {
-        props.load(new FileInputStream("src/main/resources/assign_leave.properties"));
+        loadFile();
         return props.getProperty("assign.leave_type");
     }
 
     public static String getAssignLeaveFromDate() throws IOException {
-        props.load(new FileInputStream("src/main/resources/assign_leave.properties"));
+        loadFile();
         return props.getProperty("assign.from_date");
     }
 
     public static String getAssignLeaveToDate() throws IOException {
-        props.load(new FileInputStream("src/main/resources/assign_leave.properties"));
+        loadFile();
         return props.getProperty("assign.to_date");
     }
 
     public static String getAssignLeaveDates() throws IOException {
-        props.load(new FileInputStream("src/main/resources/assign_leave.properties"));
+        loadFile();
         return props.getProperty("assign.from_date") + " to " + props.getProperty("assign.to_date");
     }
 

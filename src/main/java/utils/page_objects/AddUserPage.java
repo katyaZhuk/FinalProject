@@ -1,7 +1,9 @@
-package orange_hrm.page_objects;
+package utils.page_objects;
 
 import com.codeborne.selenide.SelenideElement;
 import utils.Log;
+
+import java.util.Optional;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -16,32 +18,44 @@ public class AddUserPage {
     private static final SelenideElement SAVE_BUTTON = $("#btnSave");
 
     public static SelenideElement getUserRoleField() {
-        Log.info("User role field is visible");
+        Optional.of(USER_ROLE_FIELD).ifPresent(
+                x -> Log.info("User role field is visible")
+        );
         return USER_ROLE_FIELD;
     }
 
     public static SelenideElement getEmployeeNameField() {
-        Log.info("Employee name field is visible");
+        Optional.of(EMPLOYEE_NAME_FIELD).ifPresent(
+                x -> Log.info("Employee name field is visible")
+        );
         return EMPLOYEE_NAME_FIELD;
     }
 
     public static SelenideElement getUsernameField() {
-        Log.info("Username field is visible");
+        Optional.of(USERNAME_FIELD).ifPresent(
+                x -> Log.info("Username field is visible")
+        );
         return USERNAME_FIELD;
     }
 
     public static SelenideElement getStatusField() {
-        Log.info("Status field is visible");
+        Optional.of(STATUS_FIELD).ifPresent(
+                x ->Log.info("Status field is visible")
+        );
         return STATUS_FIELD;
     }
 
     public static SelenideElement getPasswordField() {
-        Log.info("Password field is visible");
+        Optional.of(PASSWORD_FIELD).ifPresent(
+                x -> Log.info("Password field is visible")
+        );
         return PASSWORD_FIELD;
     }
 
     public static SelenideElement getConfirmPasswordField() {
-        Log.info("Confirm password field is visible");
+        Optional.of(CONFIRM_PASSWORD_FIELD).ifPresent(
+                x -> Log.info("Confirm password field is visible")
+        );
         return CONFIRM_PASSWORD_FIELD;
     }
 

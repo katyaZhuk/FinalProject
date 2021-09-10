@@ -1,10 +1,12 @@
-package orange_hrm.page_objects;
+package utils.page_objects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import utils.Log;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.codeborne.selenide.Selenide.*;
 import static utils.helpers.AssignLeaveHelper.*;
@@ -23,6 +25,9 @@ public class LeaveListPage {
         EMPLOYEE_FIELD.sendKeys(getAssignLeaveEmployeeName());
         SEARCH_BUTTON.click();
 
+        Optional.of(LEAVE_LIST_COLLECTION.findBy(Condition.text(dates))).ifPresent(
+                x -> Log.info("Assign leave from " + dates + " dates is found")
+        );
         return LEAVE_LIST_COLLECTION.findBy(Condition.text(dates));
     }
 }

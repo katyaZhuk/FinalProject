@@ -1,4 +1,4 @@
-package orange_hrm.page_objects;
+package utils.page_objects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import utils.Log;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.codeborne.selenide.Selenide.*;
 import static utils.helpers.AddUserHelper.getNewUsername;
@@ -31,7 +32,15 @@ public class AdminPage {
     }
 
     public static SelenideElement findNewUser() throws IOException {
-        Log.info("New user with username " + getNewUsername() + " is found");
+        Optional.of(NEW_USERS_COLLECTION.findBy(Condition.text(getNewUsername()))).ifPresent(
+                x -> {
+                    try {
+                        Log.info("New user with username " + getNewUsername() + " is found");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
         return NEW_USERS_COLLECTION.findBy(Condition.text(getNewUsername()));
     }
 

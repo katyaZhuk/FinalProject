@@ -1,9 +1,11 @@
-package orange_hrm.page_objects;
+package utils.page_objects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import utils.Log;
+
+import java.util.Optional;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -33,7 +35,9 @@ public class JobTitlesPage {
     }
 
     public static SelenideElement getNewJobTitle(String jobTitle) {
-        Log.info("Job title " + jobTitle + " is found in job titles collection");
+        Optional.of(JOB_TITLES_COLLECTION.findBy(Condition.text(jobTitle))).ifPresent(
+                x -> Log.info("Job title " + jobTitle + " is found in job titles collection")
+        );
         return JOB_TITLES_COLLECTION.findBy(Condition.text(jobTitle));
     }
 
@@ -48,7 +52,9 @@ public class JobTitlesPage {
     }
 
     public static String getJobTitleCheckbox() {
-        Log.info("New job title checkbox is selected");
+        Optional.of(JOB_TITLE_CHECKBOX).ifPresent(
+                x -> Log.info("New job title checkbox is selected")
+        );
         return JOB_TITLE_CHECKBOX;
     }
 

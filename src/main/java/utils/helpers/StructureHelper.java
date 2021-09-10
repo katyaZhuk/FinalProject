@@ -9,7 +9,7 @@ public class StructureHelper {
     static Properties props = new Properties();
 
     public static String getNewDepartment() throws IOException {
-        props.load(new FileInputStream("src/main/resources/structure.properties"));
+        props.load(new FileInputStream("src/main/resources/clientData/structure.properties"));
         return props.getProperty("department");
     }
 

@@ -1,27 +1,30 @@
 package orange_hrm.tests;
 
 import io.qameta.allure.Description;
+import utils.page_objects.AddUserPage;
+import utils.page_objects.AdminPage;
+import utils.page_objects.DashboardPage;
+import utils.page_objects.LoginPage;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
-import static orange_hrm.page_objects.AddCandidatePage.*;
-import static orange_hrm.page_objects.AddUserPage.*;
-import static orange_hrm.page_objects.AdminPage.*;
-import static orange_hrm.page_objects.AssignLeavePage.*;
-import static orange_hrm.page_objects.DashboardPage.*;
-import static orange_hrm.page_objects.JobTitlesPage.*;
-import static orange_hrm.page_objects.LeaveListPage.findAssignLeave;
-import static orange_hrm.page_objects.LoginPage.*;
-import static orange_hrm.page_objects.MyInfoPage.*;
-import static orange_hrm.page_objects.OrganizationStructurePage.*;
-import static orange_hrm.page_objects.PIMPage.clickPIMPageLink;
-import static orange_hrm.page_objects.PIMPage.findSalesEmployee;
-import static orange_hrm.page_objects.PersonalDetailsPage.*;
-import static orange_hrm.page_objects.RecruitmentPage.clickAddCandidatesButton;
-import static orange_hrm.page_objects.RecruitmentPage.clickCandidatesLink;
+import static utils.page_objects.AddCandidatePage.*;
+import static utils.page_objects.AdminPage.*;
+import static utils.page_objects.AssignLeavePage.*;
+import static utils.page_objects.DashboardPage.*;
+import static utils.page_objects.JobTitlesPage.*;
+import static utils.page_objects.LeaveListPage.findAssignLeave;
+import static utils.page_objects.LoginPage.*;
+import static utils.page_objects.MyInfoPage.*;
+import static utils.page_objects.OrganizationStructurePage.*;
+import static utils.page_objects.PIMPage.clickPIMPageLink;
+import static utils.page_objects.PIMPage.findSalesEmployee;
+import static utils.page_objects.PersonalDetailsPage.*;
+import static utils.page_objects.RecruitmentPage.clickAddCandidatesButton;
+import static utils.page_objects.RecruitmentPage.clickCandidatesLink;
 import static utils.Driver.getMaximizedWindow;
 import static utils.helpers.AddCandidateHelper.*;
 import static utils.helpers.AddUserHelper.*;
@@ -43,46 +46,45 @@ public class OrangeTests {
     @Test
     @BeforeEach
     @Description("Test for login to https://opensource-demo.orangehrmlive.com/")
-    @Order(1)
     public void loginTest() throws IOException {
 
-        openLoginPage();
-        login();
-        getDashboardPageTitle().shouldBe(visible);
+        LoginPage.openLoginPage();
+        LoginPage.login();
+        DashboardPage.getDashboardPageTitle().shouldBe(visible);
     }
 
     @Disabled
     @Test
     @Description("Test for adding new user")
-    @Order(2)
+    @Order(1)
     public void addUserTest() throws IOException {
 
-        clickAdminTab();
-        clickAddUserButton();
+        AdminPage.clickAdminTab();
+        AdminPage.clickAddUserButton();
 
-        getUserRoleField().shouldBe(visible);
-        getEmployeeNameField().shouldBe(visible);
-        getUsernameField().shouldBe(visible);
-        getStatusField().shouldBe(visible);
-        getPasswordField().shouldBe(visible);
-        getConfirmPasswordField().shouldBe(visible);
+        AddUserPage.getUserRoleField().shouldBe(visible);
+        AddUserPage.getEmployeeNameField().shouldBe(visible);
+        AddUserPage.getUsernameField().shouldBe(visible);
+        AddUserPage.getStatusField().shouldBe(visible);
+        AddUserPage.getPasswordField().shouldBe(visible);
+        AddUserPage.getConfirmPasswordField().shouldBe(visible);
 
-        selectUserRole(getESSUserRole());
-        enterEmployeeNameForAddUser(getEmployeeName());
-        enterUsername(getNewUsername());
-        selectStatus(getEnabledStatus());
-        enterPassword(getNewUserPassword());
-        enterConfirmPassword(getNewUserConfirmPassword());
+        AddUserPage.selectUserRole(getESSUserRole());
+        AddUserPage.enterEmployeeNameForAddUser(getEmployeeName());
+        AddUserPage.enterUsername(getNewUsername());
+        AddUserPage.selectStatus(getEnabledStatus());
+        AddUserPage.enterPassword(getNewUserPassword());
+        AddUserPage.enterConfirmPassword(getNewUserConfirmPassword());
 
-        clickSaveUserButton();
+        AddUserPage.clickSaveUserButton();
 
-        findNewUser().shouldBe(exist);
+        AdminPage.findNewUser().shouldBe(exist);
 
     }
 
     @Test
     @Description("Test for adding and deleting three job titles")
-    @Order(3)
+    @Order(2)
     public void addAndDeleteThreeJobTitlesTest() throws IOException {
 
         clickJobTitlesLink();
@@ -107,7 +109,7 @@ public class OrangeTests {
 
     @Test
     @Description("Test for adding new candidate")
-    @Order(4)
+    @Order(3)
     public void addCandidateTest() throws IOException {
 
         clickCandidatesLink();
@@ -129,7 +131,7 @@ public class OrangeTests {
 
     @Test
     @Description("Test for assigning leave by employee")
-    @Order(5)
+    @Order(4)
     public void assignLeaveTest() throws IOException {
 
         clickAssignLeaveLink();
@@ -151,7 +153,7 @@ public class OrangeTests {
 
     @Test
     @Description("Test for checking dashboard to watch all elements")
-    @Order(6)
+    @Order(5)
     public void checkDashboardTest() {
 
         getAssignLeaveButton().shouldBe(visible);
@@ -167,7 +169,7 @@ public class OrangeTests {
 
     @Test
     @Description("Test for checking any employee from sales subunit")
-    @Order(7)
+    @Order(6)
     public void checkSalesEmployeeTest() throws IOException {
 
         clickPIMPageLink();
@@ -184,7 +186,7 @@ public class OrangeTests {
 
     @Test
     @Description("Test for editing organisation structure by adding and deleting new department")
-    @Order(8)
+    @Order(7)
     public void editOrganizationStructureTest() throws IOException {
 
         clickOrganizationStructureLink();
@@ -208,7 +210,7 @@ public class OrangeTests {
 
     @Test
     @Description("Test for changing employee photo by uploading new one")
-    @Order(9)
+    @Order(8)
     public void changeEmployeePhotoTest() throws IOException {
 
         clickMyInfoTab();
@@ -223,7 +225,7 @@ public class OrangeTests {
 
     @Test
     @Description("Test for logout from system")
-    @Order(10)
+    @Order(9)
     public void logoutTest() {
 
         clickWelcomeDropList();
