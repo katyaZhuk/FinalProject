@@ -1,31 +1,15 @@
 package orange_hrm.tests;
 
 import io.qameta.allure.Description;
-import utils.page_objects.AddUserPage;
-import utils.page_objects.AdminPage;
-import utils.page_objects.DashboardPage;
-import utils.page_objects.LoginPage;
+import utils.Driver;
+import utils.page_objects.*;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
-import static utils.page_objects.AddCandidatePage.*;
-import static utils.page_objects.AdminPage.*;
-import static utils.page_objects.AssignLeavePage.*;
-import static utils.page_objects.DashboardPage.*;
 import static utils.page_objects.JobTitlesPage.*;
-import static utils.page_objects.LeaveListPage.findAssignLeave;
-import static utils.page_objects.LoginPage.*;
-import static utils.page_objects.MyInfoPage.*;
-import static utils.page_objects.OrganizationStructurePage.*;
-import static utils.page_objects.PIMPage.clickPIMPageLink;
-import static utils.page_objects.PIMPage.findSalesEmployee;
-import static utils.page_objects.PersonalDetailsPage.*;
-import static utils.page_objects.RecruitmentPage.clickAddCandidatesButton;
-import static utils.page_objects.RecruitmentPage.clickCandidatesLink;
-import static utils.Driver.getMaximizedWindow;
 import static utils.helpers.AddCandidateHelper.*;
 import static utils.helpers.AddUserHelper.*;
 import static utils.helpers.AssignLeaveHelper.*;
@@ -38,19 +22,33 @@ import static utils.helpers.StructureHelper.getNewDepartment;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class OrangeTests {
 
+    Driver driver = new Driver();
+    AddCandidatePage addCandidatePage = new AddCandidatePage();
+    AddUserPage addUserPage = new AddUserPage();
+    AdminPage adminPage = new AdminPage();
+    AssignLeavePage assignLeavePage = new AssignLeavePage();
+    DashboardPage dashboardPage = new DashboardPage();
+    JobTitlesPage jobTitlesPage = new JobTitlesPage();
+    LeaveListPage leaveListPage = new LeaveListPage();
+    LoginPage loginPage = new LoginPage();
+    MyInfoPage myInfoPage = new MyInfoPage();
+    OrganizationStructurePage organizationStructurePage = new OrganizationStructurePage();
+    PersonalDetailsPage personalDetailsPage = new PersonalDetailsPage();
+    PIMPage pimPage = new PIMPage();
+    RecruitmentPage recruitmentPage = new RecruitmentPage();
+
     @BeforeAll
     public void setUp() {
-        getMaximizedWindow();
+        driver.getMaximizedWindow();
     }
 
     @Test
     @BeforeEach
     @Description("Test for login to https://opensource-demo.orangehrmlive.com/")
     public void loginTest() throws IOException {
-
-        LoginPage.openLoginPage();
-        LoginPage.login();
-        DashboardPage.getDashboardPageTitle().shouldBe(visible);
+        loginPage.openLoginPage();
+        loginPage.login();
+        dashboardPage.getDashboardPageTitle().shouldBe(visible);
     }
 
     @Disabled
@@ -58,51 +56,48 @@ public class OrangeTests {
     @Description("Test for adding new user")
     @Order(1)
     public void addUserTest() throws IOException {
+        adminPage.clickAdminTab();
+        adminPage.clickAddUserButton();
 
-        AdminPage.clickAdminTab();
-        AdminPage.clickAddUserButton();
+        addUserPage.getUserRoleField().shouldBe(visible);
+        addUserPage.getEmployeeNameField().shouldBe(visible);
+        addUserPage.getUsernameField().shouldBe(visible);
+        addUserPage.getStatusField().shouldBe(visible);
+        addUserPage.getPasswordField().shouldBe(visible);
+        addUserPage.getConfirmPasswordField().shouldBe(visible);
 
-        AddUserPage.getUserRoleField().shouldBe(visible);
-        AddUserPage.getEmployeeNameField().shouldBe(visible);
-        AddUserPage.getUsernameField().shouldBe(visible);
-        AddUserPage.getStatusField().shouldBe(visible);
-        AddUserPage.getPasswordField().shouldBe(visible);
-        AddUserPage.getConfirmPasswordField().shouldBe(visible);
+        addUserPage.selectUserRole(getESSUserRole());
+        addUserPage.enterEmployeeNameForAddUser(getEmployeeName());
+        addUserPage.enterUsername(getNewUsername());
+        addUserPage.selectStatus(getEnabledStatus());
+        addUserPage.enterPassword(getNewUserPassword());
+        addUserPage.enterConfirmPassword(getNewUserConfirmPassword());
 
-        AddUserPage.selectUserRole(getESSUserRole());
-        AddUserPage.enterEmployeeNameForAddUser(getEmployeeName());
-        AddUserPage.enterUsername(getNewUsername());
-        AddUserPage.selectStatus(getEnabledStatus());
-        AddUserPage.enterPassword(getNewUserPassword());
-        AddUserPage.enterConfirmPassword(getNewUserConfirmPassword());
+        addUserPage.clickSaveUserButton();
 
-        AddUserPage.clickSaveUserButton();
-
-        AdminPage.findNewUser().shouldBe(exist);
-
+        adminPage.findNewUser().shouldBe(exist);
     }
 
     @Test
     @Description("Test for adding and deleting three job titles")
     @Order(2)
     public void addAndDeleteThreeJobTitlesTest() throws IOException {
-
-        clickJobTitlesLink();
+        adminPage.clickJobTitlesLink();
 
         getJobTitlesList().forEach(
                 elem -> {
-                    clickAddJobTitleButton();
-                    fillJobTitleField(elem);
-                    clickSaveNewJobTitleButton();
-                    getNewJobTitle(elem).shouldBe(visible);
-                    int sizeJobTitlesCollectionBeforeDeletion = getJobTitlesCollection().size();
+                    jobTitlesPage.clickAddJobTitleButton();
+                    jobTitlesPage.fillJobTitleField(elem);
+                    jobTitlesPage.clickSaveNewJobTitleButton();
+                    jobTitlesPage.getNewJobTitle(elem).shouldBe(visible);
+                    int sizeJobTitlesCollectionBeforeDeletion = jobTitlesPage.getJobTitlesCollection().size();
 
-                    getNewJobTitle(elem).$(getJobTitleCheckbox()).setSelected(true);
+                    jobTitlesPage.getNewJobTitle(elem).$(getJobTitleCheckbox()).setSelected(true);
 
-                    clickDeleteNewJobTitleButton();
-                    clickDeleteConfirmationButton();
+                    jobTitlesPage.clickDeleteNewJobTitleButton();
+                    jobTitlesPage.clickDeleteConfirmationButton();
 
-                    getJobTitlesCollection().shouldHave(size(sizeJobTitlesCollectionBeforeDeletion - 1));
+                    jobTitlesPage.getJobTitlesCollection().shouldHave(size(sizeJobTitlesCollectionBeforeDeletion - 1));
                 }
         );
     }
@@ -111,22 +106,20 @@ public class OrangeTests {
     @Description("Test for adding new candidate")
     @Order(3)
     public void addCandidateTest() throws IOException {
+        recruitmentPage.clickCandidatesLink();
+        recruitmentPage.clickAddCandidatesButton();
 
-        clickCandidatesLink();
-        clickAddCandidatesButton();
+        addCandidatePage.enterFullName(getCandidateFirstName(), getCandidateLastName());
+        addCandidatePage.enterEmail(getCandidateEmail());
+        addCandidatePage.enterContactNo(getCandidateContactNo());
+        addCandidatePage.selectJobVacancy(getCandidateJobVacancy());
+        addCandidatePage.addResume(getCandidateResume());
+        addCandidatePage.setApplicationDate(getCandidateApplicationDate());
+        addCandidatePage.selectCheckbox();
 
-        enterFullName(getCandidateFirstName(), getCandidateLastName());
-        enterEmail(getCandidateEmail());
-        enterContactNo(getCandidateContactNo());
-        selectJobVacancy(getCandidateJobVacancy());
-        addResume(getCandidateResume());
-        setApplicationDate(getCandidateApplicationDate());
-        selectCheckbox();
+        addCandidatePage.clickSaveCandidateButton();
 
-        clickSaveCandidateButton();
-
-        getNewCandidate(getCandidateLastName()).shouldBe(exist);
-
+        addCandidatePage.getNewCandidate(getCandidateLastName()).shouldBe(exist);
     }
 
     @Test
@@ -134,37 +127,36 @@ public class OrangeTests {
     @Order(4)
     public void assignLeaveTest() throws IOException {
 
-        clickAssignLeaveLink();
+        assignLeavePage.clickAssignLeaveLink();
 
-        getAssignLeaveEmployeeNameField().shouldBe(visible);
-        getAssignLeaveTypeField().shouldBe(visible);
-        getAssignLeaveFromDateField().shouldBe(visible);
-        getAssignLeaveToDateField().shouldBe(visible);
+        assignLeavePage.getAssignLeaveEmployeeNameField().shouldBe(visible);
+        assignLeavePage.getAssignLeaveTypeField().shouldBe(visible);
+        assignLeavePage.getAssignLeaveFromDateField().shouldBe(visible);
+        assignLeavePage.getAssignLeaveToDateField().shouldBe(visible);
 
-        enterEmployeeNameForAssignLeave(getAssignLeaveEmployeeName());
-        selectLeaveType(getAssignLeaveType());
-        selectFromDate(getAssignLeaveFromDate());
-        selectToDate(getAssignLeaveToDate());
+        assignLeavePage.enterEmployeeNameForAssignLeave(getAssignLeaveEmployeeName());
+        assignLeavePage.selectLeaveType(getAssignLeaveType());
+        assignLeavePage.selectFromDate(getAssignLeaveFromDate());
+        assignLeavePage.selectToDate(getAssignLeaveToDate());
 
-        clickAssignButton();
+        assignLeavePage.clickAssignButton();
 
-        findAssignLeave(getAssignLeaveDates()).shouldBe(visible);
+        leaveListPage.findAssignLeave(getAssignLeaveDates()).shouldBe(visible);
     }
 
     @Test
     @Description("Test for checking dashboard to watch all elements")
     @Order(5)
     public void checkDashboardTest() {
-
-        getAssignLeaveButton().shouldBe(visible);
-        getLeaveListButton().shouldBe(visible);
-        getTimesheetsButton().shouldBe(visible);
-        getApplyLeaveButton().shouldBe(visible);
-        getMyLeaveButton().shouldBe(visible);
-        getMyTimesheetButton().shouldBe(visible);
-        getEmployeeDistributionBySubunitDiagram().shouldBe(visible);
-        getLegendComponent().shouldBe(visible);
-        getPendingLeaveRequestsComponent().shouldBe(visible);
+        dashboardPage.getAssignLeaveButton().shouldBe(visible);
+        dashboardPage.getLeaveListButton().shouldBe(visible);
+        dashboardPage.getTimesheetsButton().shouldBe(visible);
+        dashboardPage.getApplyLeaveButton().shouldBe(visible);
+        dashboardPage.getMyLeaveButton().shouldBe(visible);
+        dashboardPage.getMyTimesheetButton().shouldBe(visible);
+        dashboardPage.getEmployeeDistributionBySubunitDiagram().shouldBe(visible);
+        dashboardPage.getLegendComponent().shouldBe(visible);
+        dashboardPage.getPendingLeaveRequestsComponent().shouldBe(visible);
     }
 
     @Test
@@ -172,66 +164,60 @@ public class OrangeTests {
     @Order(6)
     public void checkSalesEmployeeTest() throws IOException {
 
-        clickPIMPageLink();
-        findSalesEmployee(getSalesSubUnit());
+        pimPage.clickPIMPageLink();
+        pimPage.findSalesEmployee(getSalesSubUnit());
 
-        getFirstNameField().shouldHave(exactValue(getSalesFirstName()));
-        getLastNameField().shouldHave(exactValue(getSalesLastName()));
-        getEmployeeIdField().shouldHave(exactValue(getSalesId()));
-        getMaleGenderRadiobutton().shouldBe(checked);
-        getMaritalStatusField().shouldHave(exactValue(getSalesMaritalStatus()));
-        getNationalityField().shouldHave(text(getSalesNationality()));
-        getDateOfBirthField().shouldHave(exactValue(getSalesDateOfBirth()));
+        personalDetailsPage.getFirstNameField().shouldHave(exactValue(getSalesFirstName()));
+        personalDetailsPage.getLastNameField().shouldHave(exactValue(getSalesLastName()));
+        personalDetailsPage.getEmployeeIdField().shouldHave(exactValue(getSalesId()));
+        personalDetailsPage.getMaleGenderRadiobutton().shouldBe(checked);
+        personalDetailsPage.getMaritalStatusField().shouldHave(exactValue(getSalesMaritalStatus()));
+        personalDetailsPage.getNationalityField().shouldHave(text(getSalesNationality()));
+        personalDetailsPage.getDateOfBirthField().shouldHave(exactValue(getSalesDateOfBirth()));
     }
 
     @Test
     @Description("Test for editing organisation structure by adding and deleting new department")
     @Order(7)
     public void editOrganizationStructureTest() throws IOException {
+        adminPage.clickOrganizationStructureLink();
 
-        clickOrganizationStructureLink();
+        organizationStructurePage.clickEditOrganizationStructureButton();
+        organizationStructurePage.addNewDepartment();
+        organizationStructurePage.enterDepartmentName(getNewDepartment());
+        organizationStructurePage.clickSaveDepartmentButton();
+        organizationStructurePage.clickDoneButton();
 
-        clickEditOrganizationStructureButton();
-        addNewDepartment();
-        enterDepartmentName(getNewDepartment());
-        clickSaveDepartmentButton();
-        clickDoneButton();
+        int collectionSizeBeforeDeleting = organizationStructurePage.getSalesAndMarketingCollection().size();
 
-        int collectionSizeBeforeDeleting = getSalesAndMarketingCollection().size();
+        organizationStructurePage.clickEditOrganizationStructureButton();
+        organizationStructurePage.deleteNewDepartment();
+        organizationStructurePage.confirmDeleteNewDepartment();
+        organizationStructurePage.clickDoneButton();
 
-        clickEditOrganizationStructureButton();
-        deleteNewDepartment();
-        confirmDeleteNewDepartment();
-        clickDoneButton();
-
-        getSalesAndMarketingCollection().shouldHave(size(collectionSizeBeforeDeleting - 1));
-
+        organizationStructurePage.getSalesAndMarketingCollection().shouldHave(size(collectionSizeBeforeDeleting - 1));
     }
 
     @Test
     @Description("Test for changing employee photo by uploading new one")
     @Order(8)
     public void changeEmployeePhotoTest() throws IOException {
+        dashboardPage.clickMyInfoTab();
 
-        clickMyInfoTab();
+        myInfoPage.clickEmployeePhotoLink();
+        myInfoPage.selectPhotoFile(getEmployeePhotoPath());
+        myInfoPage.clickUploadButton();
 
-        clickEmployeePhotoLink();
-        selectPhotoFile(getEmployeePhotoPath());
-        clickUploadButton();
-
-        getSuccessMessage().shouldBe(visible);
-
+        myInfoPage.getSuccessMessage().shouldBe(visible);
     }
 
     @Test
     @Description("Test for logout from system")
     @Order(9)
     public void logoutTest() {
+        dashboardPage.clickWelcomeDropList();
+        dashboardPage.clickLogout();
 
-        clickWelcomeDropList();
-        clickLogout();
-
-        getLoginPanel().shouldBe(visible);
+        loginPage.getLoginPanel().shouldBe(visible);
     }
-
 }
